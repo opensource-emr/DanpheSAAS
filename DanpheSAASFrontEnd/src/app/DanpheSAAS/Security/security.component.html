@@ -1,0 +1,49 @@
+<div class="form-container" >
+  <form #form="ngForm" [formGroup]="user.formUserGroup">
+    <div>
+      <label for="hospitalName">Hospital Name</label>
+      <input type="text" id="hospitalName" name="hospitalName" placeholder="Hospital Name"
+        formControlName="hospitalNameControl" [(ngModel)]="user.hospitalName"
+        [class.ErrorHighlighter]="(hasError(user,'required','hospitalNameControl'))">
+    </div>
+    <p color *ngIf="user.formUserGroup.get('hospitalNameControl').invalid && user.formUserGroup.dirty && !submittedSuccessfully" style="color: red;">Hospital name is
+      required.</p>
+ 
+    <div>
+      <label for="hospitalName">Hospital Short Name</label>
+      <input type="text" id="hospitalShortName" name="hospitalShortName" placeholder="Hospital Short Name"
+        formControlName="hospitalShortNameControl" [(ngModel)]="user.hospitalShortName"
+        [class.ErrorHighlighter]="(hasError(user,'required','hospitalShortNameControl'))">
+    </div>
+    <p color *ngIf="user.formUserGroup.get('hospitalShortNameControl').invalid && user.formUserGroup.dirty && !submittedSuccessfully" style="color: red;">Hospital Short name is
+      required.</p>
+ 
+    <div>
+      <label for="ContactNumber">Contact Number</label>
+      <input type="text" id="ContactNumber" name="ContactNumber" placeholder="Contact Number"
+        formControlName="contactNumberControl" [(ngModel)]="user.contactNumber"
+        [class.ErrorHighlighter]="(hasError(user,'required','contactNumberControl'))">
+    </div>
+      <p color *ngIf="user.formUserGroup.get('contactNumberControl').errors?.required && user.formUserGroup.dirty && !submittedSuccessfully" style="color: red;">Contact Number required.</p>
+      <p color *ngIf="user.formUserGroup.get('contactNumberControl').errors?.pattern && user.formUserGroup.dirty && !submittedSuccessfully" style="color: red;">Please enter the valid mobile number.</p>
+ 
+    <div>
+      <label for="Email">Email</label>
+      <input type="text" id="Email" name="Email" placeholder="Email" formControlName="emailControl"
+        [(ngModel)]="user.email" [class.ErrorHighlighter]="(hasError(user,'required','emailControl'))">
+    </div>
+    <p color *ngIf="user.formUserGroup.get('emailControl').errors?.required && user.formUserGroup.dirty && !submittedSuccessfully" style="color: red;">Email required.</p>
+    <p color *ngIf="user.formUserGroup.get('emailControl').errors?.email && user.formUserGroup.dirty && !submittedSuccessfully" style="color: red;">Please enter Email in valid Format</p>
+
+    <re-captcha formControlName="recaptcha"  #recaptchaElement [(ngModel)]="token" ></re-captcha>
+    <p color *ngIf="user.formUserGroup.get('recaptcha').errors?.required && user.formUserGroup.dirty && !submittedSuccessfully" style="color: red;">This field is required.</p>
+    <button (click)="Onsubmit(form)">Submit</button>
+  </form>
+</div>
+
+
+
+
+
+
+
